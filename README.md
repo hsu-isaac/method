@@ -1,2 +1,2 @@
-# method
+# Method
 Method SWE Assignment Lean
