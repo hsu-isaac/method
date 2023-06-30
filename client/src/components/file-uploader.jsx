@@ -1,47 +1,45 @@
 import axios from 'axios';
-import React, { Component } from 'react';
+import React from 'react';
 
-class App extends Component {
 
-  state = {
-    selectedFile: null
+export default function FileUploader({ getPaymentData }) {
+  const [file, setFile] = React.useState(null);
+  const [methodEntityResponse, setMethodEntityResponse] = React.useState(null);
+
+  const onFileChange = event => {
+    setFile(event.target.files[0]);
   };
 
-  onFileChange = event => {
-    this.setState({ selectedFile: event.target.files[0] });
-
-  };
-
-
-  onFileUpload = () => {
+  const onFileUpload = () => {
     const formData = new FormData();
     formData.append(
       "myFile",
-      this.state.selectedFile,
-      this.state.selectedFile.name
+      file,
+      file.name
     );
-    console.log(Array.from(formData.entries()));
-    axios.post("/api/uploadfile", formData);
+    axios.post("/api/uploadfile", formData).then(response => {
+      setMethodEntityResponse(response.data);
+    }).catch(err => {
+      console.error(err);
+    });
   };
 
-  // File content to be displayed after
-  // file upload is complete
-  fileData = () => {
+  const confirmPayment = () => {
+    console.log(methodEntityResponse)
+    axios.post("/api/confirm-payment", {data: methodEntityResponse})
+  }
 
-    if (this.state.selectedFile) {
-
+  const fileData = () => {
+    if (file) {
       return (
         <div>
           <h2>File Details:</h2>
-          <p>File Name: {this.state.selectedFile.name}</p>
-
-          <p>File Type: {this.state.selectedFile.type}</p>
-
+          <p>File Name: {file.name}</p>
+          <p>File Type: {file.type}</p>
           <p>
             Last Modified:{" "}
-            {this.state.selectedFile.lastModifiedDate.toDateString()}
+            {file.lastModifiedDate.toDateString()}
           </p>
-
         </div>
       );
     } else {
@@ -54,20 +52,32 @@ class App extends Component {
     }
   };
 
-  render() {
-
-    return (
-      <div>
+  const methodEntityResponseComponent = () => {
+    if (methodEntityResponse) {
+      return (
         <div>
-          <input type="file" onChange={this.onFileChange} />
-          <button onClick={this.onFileUpload}>
-            Upload!
-          </button>
+          <button onClick={confirmPayment}>Hello I am method response button</button>
         </div>
-        {this.fileData()}
-      </div>
-    );
+      )
+    } else {
+      return (
+        <div>
+          <button>Bad Button</button>
+        </div>
+      )
+    }
   }
-}
 
-export default App;
+  return (
+    <div>
+      <div>
+        <input type="file" onChange={onFileChange} />
+        <button onClick={onFileUpload}>
+          Upload!
+        </button>
+      </div>
+      {fileData()}
+      {methodEntityResponseComponent()}
+    </div>
+  );
+};

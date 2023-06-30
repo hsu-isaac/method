@@ -6,6 +6,10 @@ import FileUploader from "./components/file-uploader";
 
 function App() {
   const [data, setData] = React.useState(null);
+  const [payments, setPayments] = React.useState(null);
+  const getPaymentData = (paymentData) => {
+    setPayments(paymentData)
+  }
 
   React.useEffect(() => {
     fetch("/api")
@@ -18,7 +22,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>{!data ? "Loading..." : data}</p>
-        <FileUploader />
+        <FileUploader getPaymentData={getPaymentData}/>
       </header>
     </div>
   );
