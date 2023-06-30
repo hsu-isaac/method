@@ -12,10 +12,11 @@ Method SWE Assignment Lean
     - ~~payments ()~~
       
    3b) ~~Logic within function to read XML payment requests one at a time~~
-4) Y/N endpoint to initiate payment to entities
-5) Create and link DB to have table for batch updates and entities
-6) Generate CSV reports
+4) ~~Y/N endpoint to initiate payment to entities~~
+5) UI to show entities to confirm
+6) Create and link DB to have table for batch updates and entities
+7) Generate CSV reports
    - Total amount of funds paid out per unique source account (likely distinguished from the Payor tag)
    - Total amount of funds paid out per Dunkin branch
    - The status of every payment and its relevant metadata (store batch table with incrementing ID (FK) with file name and time stamp, entity table containing entity ID from method and each has a batch FK)
- 7) UI/FE
+ 8) UI/FE
