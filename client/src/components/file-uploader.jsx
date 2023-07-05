@@ -1,8 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 
-
-export default function FileUploader({ getPaymentData }) {
+export default function FileUploader() {
   const [file, setFile] = React.useState(null);
   const [methodEntityResponse, setMethodEntityResponse] = React.useState(null);
 
@@ -25,7 +24,6 @@ export default function FileUploader({ getPaymentData }) {
   };
 
   const confirmPayment = () => {
-    console.log(methodEntityResponse)
     axios.post("/api/confirm-payment", {data: methodEntityResponse})
   }
 
@@ -33,7 +31,7 @@ export default function FileUploader({ getPaymentData }) {
     if (file) {
       return (
         <div>
-          <h2>File Details:</h2>
+          <p>File Details:</p>
           <p>File Name: {file.name}</p>
           <p>File Type: {file.type}</p>
           <p>
@@ -45,8 +43,7 @@ export default function FileUploader({ getPaymentData }) {
     } else {
       return (
         <div>
-          <br />
-          <h4>Choose before Pressing the Upload button</h4>
+          <p>Choose before Pressing the Upload button</p>
         </div>
       );
     }
@@ -56,13 +53,13 @@ export default function FileUploader({ getPaymentData }) {
     if (methodEntityResponse) {
       return (
         <div>
-          <button onClick={confirmPayment}>Hello I am method response button</button>
+          <button onClick={confirmPayment}>Click to process payment</button>
         </div>
       )
     } else {
       return (
         <div>
-          <button>Bad Button</button>
+          <p>Button to confirm payment will appear here when data has been processed</p>
         </div>
       )
     }

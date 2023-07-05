@@ -91,7 +91,6 @@ app.post("/api/uploadfile", upload.any() , async (req, res, next) => {
 });
 
 app.post("/api/confirm-payment", upload.any(), async (req, res, next) => {
-  console.log("req.body", req.body.data.paymentInfo)
   const sendPayments = async () => {
     Promise.all(
       req.body.data.paymentInfo.map(async (paymentData) => {
@@ -102,7 +101,6 @@ app.post("/api/confirm-payment", upload.any(), async (req, res, next) => {
             paymentData.accountACHId,
             paymentData.accountLiabilityId
           );
-          console.log(methodPaymentReturn)
         } catch {
           return;
         }
