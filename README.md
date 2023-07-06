@@ -1,6 +1,13 @@
 # Method
 Method SWE Assignment Lean
 
+##### Table of Contents
+* [How to run](https://github.com/hsu-isaac/method#how-to-run)
+* [Notes](https://github.com/hsu-isaac/method#notes)
+    * [Outline](https://github.com/hsu-isaac/method#outline)
+    * [The Issue](https://github.com/hsu-isaac/method#the-issue)
+* [TODO](https://github.com/hsu-isaac/method#the-issue)
+
 ## How to run
 1) Open ~/method/server in your terminal and run
     ```
